@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Vivian Okereke Music | Order Summary</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #e2d9ff 0%, #cec0fc 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .order-card {
+      max-width: 500px;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 28px 48px -15px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .order-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 34px 55px -18px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-banner {
+      background: linear-gradient(125deg, #281c47 0%, #3e2a63 100%);
+      padding: 1.8rem 1.8rem 1.3rem 1.8rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 3px solid #e2c4ff;
+    }
+
+    .hero-banner::after {
+      content: "♩ ♪ ♫";
+      font-size: 70px;
+      opacity: 0.08;
+      position: absolute;
+      bottom: -10px;
+      right: 12px;
+      font-family: monospace;
+      pointer-events: none;
+      color: white;
+      white-space: pre;
+    }
+
+    .music-icon {
+      font-size: 2.4rem;
+      letter-spacing: 5px;
+      display: inline-block;
+      background: rgba(255, 245, 255, 0.18);
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      backdrop-filter: blur(3px);
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #f9f0ff;
+      text-transform: uppercase;
+      margin-top: 0.7rem;
+    }
+
+    .brand-highlight {
+      background: linear-gradient(120deg, #ffe6b3, #ffd68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+
+    .content {
+      padding: 1.8rem 1.8rem 2rem 1.8rem;
+    }
+
+    .order-header {
+      text-align: center;
+      margin-bottom: 1.4rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #2a1a49;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.4rem;
+    }
+
+    .customer-name {
+      background: #f0eaff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.35rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4c2b8c;
+      margin-top: 6px;
+    }
+
+    .customer-name::before {
+      content: "🎤";
+      font-size: 0.9rem;
+    }
+
+    .description {
+      text-align: center;
+      color: #4a3b62;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.8rem;
+      background: #fcfaff;
+      padding: 1rem 0.9rem;
+      border-radius: 1.25rem;
+      font-weight: 500;
+    }
+
+    .description p {
+      max-width: 310px;
+      margin: 0 auto;
+    }
+
+    .plan-summary {
+      background: #f5efff;
+      border-radius: 1.25rem;
+      padding: 1rem 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 1.8rem;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .plan-info {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      flex: 2;
+    }
+
+    .plan-icon {
+      background: #392a60;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      color: #ffde9e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .plan-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan-name {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #281e42;
+    }
+
+    .plan-price {
+      font-size: 0.9rem;
+      color: #5e4d82;
+      font-weight: 500;
+    }
+
+    .change-link {
+      background: transparent;
+      border: none;
+      color: #7a4cd6;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: underline;
+      padding: 0.45rem 0.9rem;
+      border-radius: 30px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      cursor: pointer;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .payment-btn {
+      width: 100%;
+      background: #34215c;
+      border: none;
+      padding: 1rem;
+      border-radius: 3rem;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.25s ease;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 18px -8px rgba(52, 33, 92, 0.4);
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .payment-btn:hover {
+      background: #4f3790;
+      transform: scale(1.01);
+      box-shadow: 0 12px 22px -10px rgba(52, 33, 92, 0.5);
+    }
+
+    .payment-btn:active {
+      transform: scale(0.98);
+      background: #2a1a4a;
+    }
+
+    .cancel-link {
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #9080b2;
+      padding: 0.6rem;
+      border-radius: 2rem;
+      transition: all 0.2s;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .cancel-link:hover {
+      background: #f2ecff;
+      color: #553c91;
+    }
+
+    .cancel-link:active {
+      transform: scale(0.97);
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 1rem;
+      }
+      .content {
+        padding: 1.3rem;
+      }
+      .plan-summary {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 1.65rem;
+      }
+      .brand {
+        font-size: 0.95rem;
+      }
+    }
+
+    .payment-btn, .cancel-link {
+      transition: all 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+
+<div class="order-card">
+  <div class="hero-banner">
+    <div class="music-icon">🎵 🎤 🎧</div>
+    <div class="brand">Vivian Okereke <span class="brand-highlight">Music</span></div>
+  </div>
+
+  <div class="content">
+    <div class="order-header">
+      <h1>Order Summary</h1>
+      <div class="customer-name">Vivian Okereke</div>
+    </div>
+
+    <div class="description">
+      <p>You can now listen to millions of songs, audiobooks, and podcasts on any device anywhere you like!</p>
+    </div>
+
+    <div class="plan-summary">
+      <div class="plan-info">
+        <div class="plan-icon">💿</div>
+        <div class="plan-details">
+          <span class="plan-name">Yearly Plan</span>
+          <span class="plan-price">$70.99/monthly</span>
+        </div>
+      </div>
+      <button class="change-link" aria-label="Change plan">Change</button>
+    </div>
+
+    <button class="payment-btn" aria-label="Proceed to payment">
+      💳 Proceed to Payment
+    </button>
+
+    <button class="cancel-link" aria-label="Cancel order">
+      Cancel Order
+    </button>
+  </div>
+</div>
+
+</body>
+</html>
